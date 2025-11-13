@@ -37,9 +37,6 @@ docsearch = PineconeVectorStore.from_existing_index(
     embedding=embeddings
 )
 
-from langchain_openai import OpenAI
-llm = OpenAI(temperature=0.4, max_tokens=500)
-
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":3})
 
 llm = OpenAI(temperature=0.4, max_tokens=500)
@@ -52,3 +49,4 @@ prompt = ChatPromptTemplate.from_messages(
 
 question_answer_chain = create_stuff_documents_chain(llm, prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+
